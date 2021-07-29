@@ -1,0 +1,24 @@
+{
+  "name": "lecture_py_docker_env",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "create:dev":"docker run -itd --name flask_dev -p 5000:5000 -e PORT=5000 -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp python:3 bash",
+    "install:dev":"docker exec -it flask_dev pip install -r requirements.txt",
+    "start:dev":"docker exec -it flask_dev python app.py",
+    "attach:dev":"docker exec -it flask_dev bash",
+    "freeze:dev":"docker exec -it flask_dev pip freeze > requirements.txt",
+    "rm:dev":"docker stop flask_dev && docker rm flask_dev",
+    
+    "create:test":"docker run -itd --name flask_test -p 5001:5001 -e PORT=5001 -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp python:3 bash",
+    "install:test":"docker exec -it flask_test pip install -r requirements.txt",
+    "start:test":"docker exec -it flask_test python app.py",
+    "attach:test":"docker exec -it flask_test bash",
+    "freeze:test":"docker exec -it flask_test pip freeze > requirements.txt",
+    "rm:test":"docker stop flask_test && docker rm flask_test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
