@@ -22,10 +22,36 @@ bash:dev        컨테이너 접속
 freeze:dev      requirements.txt 추출
 rm:dev          컨테이너 삭제
 
-create:test     --테스트 서버에 대한 명령어
+create:test     --테스트 서버에 대한 명령어(동일)
 install:test
 start:test
 bash:test
 freeze:test
 rm:test
+
+build           도커 이미지로 빌드
+run:prod        빌드한이미지를 컨테이너 실행
+log:prod        로그 보기
+```
+
+## 명령어
+
+```js
+    "create:dev":"docker run -itd --name flask_dev -p 5000:5000 -e PORT=5000 -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp python:3 bash",
+    "install:dev":"docker exec -it flask_dev pip install -r requirements.txt",
+    "start:dev":"docker exec -it flask_dev python app.py",
+    "bash:dev":"docker exec -it flask_dev bash",
+    "freeze:dev":"docker exec -it flask_dev pip freeze > requirements.txt",
+    "rm:dev":"docker stop flask_dev && docker rm flask_dev",
+
+    "build":"docker build -t flask_server .",
+    "run:prod":"docker run -itd --name myflask_server -p 5002:5002 -e PORT=5002 flask_server",
+    "log:prod":"docker logs -f myflask_server",
+    
+    "create:test":"docker run -itd --name flask_test -p 5001:5001 -e PORT=5001 -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp python:3 bash",
+    "install:test":"docker exec -it flask_test pip install -r requirements.txt",
+    "start:test":"docker exec -it flask_test python app.py",
+    "bash:test":"docker exec -it flask_test bash",
+    "freeze:test":"docker exec -it flask_test pip freeze > requirements.txt",
+    "rm:test":"docker stop flask_test && docker rm flask_test"
 ```

@@ -10,6 +10,10 @@
     "bash:dev":"docker exec -it flask_dev bash",
     "freeze:dev":"docker exec -it flask_dev pip freeze > requirements.txt",
     "rm:dev":"docker stop flask_dev && docker rm flask_dev",
+
+    "build":"docker build -t flask_server .",
+    "run:prod":"docker run -itd --name myflask_server -p 5002:5002 -e PORT=5002 flask_server",
+    "log:prod":"docker logs -f myflask_server",
     
     "create:test":"docker run -itd --name flask_test -p 5001:5001 -e PORT=5001 -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp python:3 bash",
     "install:test":"docker exec -it flask_test pip install -r requirements.txt",
